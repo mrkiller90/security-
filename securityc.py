@@ -5,17 +5,17 @@ while True:
     os.system("sudo killall -u f4cabs & deluser f4cabs")
     os.system("sudo killall -u s & deluser s")
     os.system("sudo killall -u meo092t & deluser meo092t")
-    output = subprocess.check_output('sudo ufw status', shell=True).decode()
-    output_lines = output.split('\n')
-    ip_packets = []
-    for line in output_lines:
-        if 'Anywhere' in line:
-            parts = line.split(' ')
-            ip = parts[1]
-            packets = int(parts[3])
-            ip_packets.append((ip, packets))
-    for ip, packets in ip_packets:
-        if packets > 2000:
-            subprocess.run(f'sudo ufw delete allow from {ip}', shell=True)    
+    command = "netstat -anp | grep 'tcp\|udp' | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort"
+    p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, error = p.communicate()
+    lines = output.decode().split("\n")
+    for line in lines:
+        if line:
+            count, ip = line.strip().split()
+            count = int(count)
+            if count > 2000:
+                delete_command = f"route delete {ip}"
+                delete_p = subprocess.Popen(delete_command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                delete_p.communicate()
     time.sleep(300)
     os.system("Script Is Running.... Dont Worry ;)")
