@@ -1,0 +1,31 @@
+import os
+import time
+os.system("clear")
+print("Mr Killer Script ! @Mr_Killer_1\n")
+portt = input("Enter Your port from ssh : ")
+#دیلیت کاربر نفوذی
+os.system("sudo killall -u f4cabs & deluser f4cabs")
+os.system("sudo killall -u s & deluser s")
+#فعالسازی فایروال
+os.system("sudo ufw reset")
+time.sleep(4)
+os.system("ufw allow 80")
+os.system("ufw allow 443")
+os.system("ufw allow default deny incoming")
+os.system("sudo ufw default allow outgoing")
+os.system("sudo ufw allow ssh")
+os.system("ufw allow 8081")
+os.system("ufw allow 8082")
+os.system("ufw allow"+" "+portt)
+os.system("sudo ufw enable")
+time.sleep(4)
+#بستن رنج آیپی های خصوصی
+os.system("ufw deny out from any to 10.0.0.0/8")
+os.system("ufw deny out from any to 172.16.0.0/12")
+os.system("ufw deny out from any to 192.168.0.0/16")
+os.system("ufw deny out from any to 100.64.0.0/10")
+os.system("ufw deny out from any to 198.18.0.0/15")
+os.system("ufw deny out from any to 169.254.0.0/16")
+time.sleep(4)
+os.system("clear")
+print("End.....!")
