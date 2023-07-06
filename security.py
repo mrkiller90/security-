@@ -21,12 +21,14 @@ os.system("ufw allow"+" "+portt)
 os.system("sudo ufw enable")
 time.sleep(4)
 #بستن رنج آیپی های خصوصی
+"""
 os.system("ufw deny out to 10.0.0.0/8")
 os.system("ufw deny out to 172.16.0.0/12")
 os.system("ufw deny out to 192.168.0.0/16")
 os.system("ufw deny out to 100.64.0.0/10")
 os.system("ufw deny out to 198.18.0.0/15")
 os.system("ufw deny out to 169.254.0.0/1")
+"""
 time.sleep(4)
 os.system("clear")
 os.system("ls /home")
