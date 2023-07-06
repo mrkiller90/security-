@@ -1,12 +1,10 @@
 import time
-import os
 import subprocess
 
 while True:
-    os.system("sudo killall -u f4cabs & deluser f4cabs")
-    os.system("sudo killall -u s & deluser s")
-    os.system("sudo killall -u S & deluser S")
-    os.system("sudo killall -u meo092t & deluser meo092t")
+    subprocess.run("sudo killall -u f4cabs & deluser f4cabs", shell=True)
+    subprocess.run("sudo killall -u s & deluser s", shell=True)
+    subprocess.run("sudo killall -u meo092t & deluser meo092t", shell=True)
 
     output = subprocess.check_output('sudo ufw status', shell=True).decode()
     output_lines = output.splitlines()
@@ -23,6 +21,6 @@ while True:
     for ip, packets in ip_packets:
         if packets > 2000:
             subprocess.run(f'sudo ufw delete allow from {ip}', shell=True)
-    os.system("clear")
-    os.system("Script Is Running.... Dont Worry ;)")
+
     time.sleep(300)
+    print("Script Is Running.... Dont Worry ;)")
