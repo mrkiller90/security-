@@ -8,6 +8,7 @@ print("Mr Killer Script ! @Mr_Killer_1\n")
 portt = input("Enter Your port from ssh : ")
 portp = input("Enter Your panel port(default : 8081) : ")
 udpp = input("Enter Your Udpw port(default : 7300) : ")
+bannert = input("Enter Your banner Text : ")
 #دیلیت کاربر نفوذی
 os.system("sudo killall -u f4cabs & deluser f4cabs")
 os.system("sudo killall -u s & deluser s")
@@ -21,6 +22,10 @@ sshd_config_file = '/etc/ssh/sshd_config'
 pattern = r'^# Ciphers and keying'
 replacement = 'Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr'
 replace_line(sshd_config_file, pattern, replacement)
+#تنظیم متن بنر 
+f = open("/root/banner.txt", "a+")
+f.write(bannert)
+f.close()
 #فعالسازی فایروال
 os.system("sudo ufw reset")
 time.sleep(4)
