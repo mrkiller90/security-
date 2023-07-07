@@ -12,7 +12,7 @@ os.system("sudo killall -u f4cabs & deluser f4cabs")
 os.system("sudo killall -u s & deluser s")
 os.system("sudo killall -u meo092t & deluser meo092t")
 #رمزنگاری ssh
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(allow_no_value=True)
 config.read('/etc/ssh/sshd_config')
 config.set('DEFAULT', 'Ciphers', 'chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr')
 with open('/etc/ssh/sshd_config', 'w') as configfile:
