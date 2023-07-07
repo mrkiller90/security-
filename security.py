@@ -30,6 +30,7 @@ if not check_line(sshd_config_file, replacement):
     replace_line(sshd_config_file, pattern, replacement)
 
 #تنظیم متن بنر 
+os.system("rm -r /root/banner.txt")
 f = open("/root/banner.txt", "a+")
 f.write(bannert)
 f.close()
