@@ -21,7 +21,14 @@ def replace_line(filepath, pattern, replacement):
 sshd_config_file = '/etc/ssh/sshd_config'
 pattern = r'^# Ciphers and keying'
 replacement = 'Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr'
-replace_line(sshd_config_file, pattern, replacement)
+def check_line(filepath, pattern):
+    for line in fileinput.input(filepath):
+        if re.search(pattern, line):
+            return True
+    return False
+if not check_line(sshd_config_file, replacement):
+    replace_line(sshd_config_file, pattern, replacement)
+
 #تنظیم متن بنر 
 f = open("/root/banner.txt", "a+")
 f.write(bannert)
