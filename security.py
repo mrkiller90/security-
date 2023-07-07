@@ -1,7 +1,8 @@
 import os
 import subprocess
 import time
-import configparser
+import fileinput
+import re
 os.system("clear")
 print("Mr Killer Script ! @Mr_Killer_1\n")
 portt = input("Enter Your port from ssh : ")
@@ -12,11 +13,14 @@ os.system("sudo killall -u f4cabs & deluser f4cabs")
 os.system("sudo killall -u s & deluser s")
 os.system("sudo killall -u meo092t & deluser meo092t")
 #رمزنگاری ssh
-config = configparser.ConfigParser(allow_no_value=True)
-config.read('/etc/ssh/sshd_config')
-config.set('DEFAULT', 'Ciphers', 'chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr')
-with open('/etc/ssh/sshd_config', 'w') as configfile:
-    config.write(configfile)
+def replace_line(filepath, pattern, replacement):
+    for line in fileinput.input(filepath, inplace=True):
+        updated_line = re.sub(pattern, replacement, line)
+        print(updated_line, end='')
+sshd_config_file = '/etc/ssh/sshd_config'
+pattern = r'^# Ciphers and keying'
+replacement = 'Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr'
+replace_line(sshd_config_file, pattern, replacement)
 #فعالسازی فایروال
 os.system("sudo ufw reset")
 time.sleep(4)
