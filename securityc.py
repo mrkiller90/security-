@@ -21,5 +21,6 @@ while True:
     for ip, packets in ip_packets:
         if packets > 2000:
             subprocess.run(f'sudo ufw delete allow from {ip}', shell=True)
-    time.sleep(300)
     os.system("clear")
+    time.sleep(300)
+    
